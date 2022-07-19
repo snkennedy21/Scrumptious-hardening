@@ -16,8 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path, reverse_lazy
 from django.views.generic.base import RedirectView
+from django.contrib.auth.views import LoginView, LogoutView
 
 urlpatterns = [
+    path("accounts/logout/", LogoutView.as_view(), name="logout"),
+    path("accounts/login/", LoginView.as_view(), name="login"),
     path("admin/", admin.site.urls),
     path("recipes/", include("recipes.urls")),
     path("tags/", include("tags.urls")),
