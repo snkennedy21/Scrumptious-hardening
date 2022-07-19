@@ -2,16 +2,17 @@
 {% load markdownify %}
 
 {% block content %}
-  <main class="tag-detail">
-    <div>
-      <a href="{% url 'tag_edit' tag.id %}">Edit</a>
-      <a href="{% url 'tag_delete' tag.id %}">Delete</a>
-    </div>
-    <h2>Recipes for {{ tag.name }}</h2>
-    {% for recipe in tag.recipes.all %}
-      <p>
-        <a href="{% url 'recipe_detail' recipe.pk %}">{{ recipe.name }}</a>
-      </p>
-    {% endfor %}
-  </main>
+<main class="tag-detail">
+  <div>
+    <a href="{% url 'tag_edit' tag.id %}">Edit</a>
+    <a href="{% url 'tag_delete' tag.id %}">Delete</a>
+  </div>
+  <h2>Author: {{ tag.author }}</h2>
+  <h2>Recipes for {{ tag.name }}</h2>
+  {% for recipe in tag.recipes.all %}
+  <p>
+    <a href="{% url 'recipe_detail' recipe.pk %}">{{ recipe.name }}</a>
+  </p>
+  {% endfor %}
+</main>
 {% endblock content %}
