@@ -34,10 +34,15 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["localhost", ".herokuapp.com", "127.0.0.1"]
 
+INTERNAL_IPS = [
+    "127.0.0.1"
+]
+
 
 # Application definition
 
 INSTALLED_APPS = [
+    "debug_toolbar",
     "meal_plans.apps.MealPlansConfig",
     "recipes.apps.RecipesConfig",
     "tags.apps.TagsConfig",
@@ -51,6 +56,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",

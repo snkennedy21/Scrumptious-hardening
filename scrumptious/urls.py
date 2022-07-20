@@ -19,6 +19,7 @@ from django.views.generic.base import RedirectView
 from django.contrib.auth.views import LoginView, LogoutView
 
 urlpatterns = [
+    path('__debug__/', include('debug_toolbar.urls')),
     path("accounts/logout/", LogoutView.as_view(), name="logout"),
     path("accounts/login/", LoginView.as_view(), name="login"),
     path("admin/", admin.site.urls),
