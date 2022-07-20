@@ -15,7 +15,7 @@ class Recipe(models.Model):
     updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.name + " by " + str(self.author)
+        return self.name
 
 
 class Measure(models.Model):

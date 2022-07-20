@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<main>
+  <a href="#">Edit</a>
+  <a href="#">Delete</a>
+  <p>Recipes for "{{ plan.name }}"</p>
+  <div>
+    {% for recipe in plan.recipes.all %}
+    <div>
+      <a href="#">{{ recipe }}</a>
+    </div>
+    {% endfor %}
+  </div>
+</main>
+{% endblock content %}

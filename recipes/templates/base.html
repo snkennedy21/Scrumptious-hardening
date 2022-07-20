@@ -36,6 +36,9 @@
         {% endif %}
         {% if user.is_authenticated %}
         <li>
+          <a href="{% url 'show_meal_plans' %}">Meal Plans</a>
+        </li>
+        <li>
           <a href="{% url 'logout' %}">Logout</a>
         </li>
         {% endif %}

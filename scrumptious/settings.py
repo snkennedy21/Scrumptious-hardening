@@ -38,6 +38,7 @@ ALLOWED_HOSTS = ["localhost", ".herokuapp.com", "127.0.0.1"]
 # Application definition
 
 INSTALLED_APPS = [
+    "meal_plans.apps.MealPlansConfig",
     "recipes.apps.RecipesConfig",
     "tags.apps.TagsConfig",
     "django.contrib.admin",
@@ -61,6 +62,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "scrumptious.urls"
+
 
 TEMPLATES = [
     {

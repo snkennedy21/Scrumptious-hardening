@@ -1,0 +1,13 @@
+{% extends 'paginate.html' %}
+
+{% block content %}
+<main class="recipe-grid">
+  {% for plan in plans %}
+  <div class="recipe-card">
+    <h2 class="recipe-card-title">
+      <a href="{% url 'meal_details' plan.pk %}">{{ plan.name }}</a>
+    </h2>
+  </div>
+  {% endfor %}
+</main>
+{% endblock content %}
