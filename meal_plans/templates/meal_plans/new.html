@@ -2,6 +2,12 @@
 
 {% block content %}
 <main>
-
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <div class="control">
+      <button class="button">Create</button>
+    </div>
+  </form>
 </main>
 {% endblock content %}

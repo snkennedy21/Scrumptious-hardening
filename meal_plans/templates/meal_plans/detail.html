@@ -3,7 +3,7 @@
 {% block content %}
 <main>
   <a href="{% url 'meal_plan_edit' plan.pk%}">Edit</a>
-  <a href="#">Delete</a>
+  <a href="{% url 'meal_plan_delete' plan.pk %}">Delete</a>
   <p>Recipes for "{{ plan.name }}"</p>
   <div>
     {% for recipe in plan.recipes.all %}
