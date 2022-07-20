@@ -61,3 +61,9 @@ class RecipeDeleteView(DeleteView):
     model = Recipe
     template_name = "recipes/delete.html"
     success_url = reverse_lazy("recipes_list")
+
+class UserListView(ListView):
+    model = Recipe
+    template_name = "recipes/users.html"
+    context_object_name = "recipes"
+    paginate_by = 10
