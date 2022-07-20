@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, CreateView, DeleteView, UpdateView, ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -24,3 +24,18 @@ class MealPlanDetailView(LoginRequiredMixin, DetailView):
 
   def get_queryset(self):
     return MealPlan.objects.filter(owner=self.request.user)
+
+class MealPlanCreateView(LoginRequiredMixin, CreateView):
+  model = MealPlan
+  template_name = "meal_plans/new.html"
+
+  def form_valid(self, form):
+    plan = form.save(commit=False)
+    plan.owner = self.request.user
+    plan.save()
+    form.save_m2m()
+    return redirect("meal_details", pk=plan.id)
+
+class MealPlanUpdateView(LoginRequiredMixin, UpdateView):
+  model = MealPlan
+  template_name = "meal_plans/edit.html"
