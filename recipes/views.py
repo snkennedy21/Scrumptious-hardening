@@ -4,6 +4,7 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth import get_user_model
 
 from recipes.forms import RatingForm
 from recipes.models import Recipe
@@ -62,8 +63,16 @@ class RecipeDeleteView(DeleteView):
     template_name = "recipes/delete.html"
     success_url = reverse_lazy("recipes_list")
 
+User = get_user_model()
+users = User.objects.all()
+
+print(Recipe.objects.all())
+
 class UserListView(ListView):
-    model = Recipe
+    model = User
     template_name = "recipes/users.html"
-    context_object_name = "recipes"
-    paginate_by = 10
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['users'] = users
+        return context

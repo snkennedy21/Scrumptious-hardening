@@ -2,9 +2,9 @@
 
 {% block content %}
 <main>
-  {% for recipe in recipes %}
+  {% for user in users %}
   <div>
-    <p>{{ recipe.author }}: {{ recipe.name }}</p>
+    <p>{{ user.recipes.all }}</p>
   </div>
   {% endfor %}
 </main>
