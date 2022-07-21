@@ -1,14 +1,13 @@
 {% extends 'paginate.html' %}
 
 {% block content %}
-<main class="recipe-grid">
-  <p>hi</p>
+<main>
+  <p>Food Items</p>
   {% for cart in carts %}
-  <div class="recipe-card">
-    <h2 class="recipe-card-title">
-      <p>{{ cart.food_item }}</p>
-    </h2>
-  </div>
+  <ul>
+    <li>{{ cart.food_item }}</li>
+  </ul>
   {% endfor %}
+  <a href="{% url 'shopping_items_delete' %}">Delete All</a>
 </main>
 {% endblock content %}

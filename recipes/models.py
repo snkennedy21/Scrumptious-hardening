@@ -79,9 +79,9 @@ class Rating(models.Model):
 
 
 ####### Shopping Cart Models ###########
-class ShoppingCart(models.Model):
-    user = models.ForeignKey(USER_MODEL, related_name="shopping_carts", on_delete=models.CASCADE)
-    food_item = models.ForeignKey("FoodItem", related_name="shopping_carts", on_delete=models.CASCADE)
+class ShoppingItem(models.Model):
+    user = models.ForeignKey(USER_MODEL, related_name="shopping_items", on_delete=models.CASCADE)
+    food_item = models.ForeignKey("FoodItem", related_name="shopping_items", on_delete=models.CASCADE)
 
     def __str__(self):
         return str(self.food_item)

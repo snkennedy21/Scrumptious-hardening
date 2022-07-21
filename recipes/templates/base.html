@@ -41,6 +41,9 @@
         <li>
           <a href="{% url 'logout' %}">Logout</a>
         </li>
+        <li>
+          <a href="{% url 'shopping_list' %}">Shopping List ({{ user.shopping_items.all|length }})</a>
+        </li>
         {% endif %}
       </ul>
     </nav>

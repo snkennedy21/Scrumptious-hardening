@@ -1,3 +1,4 @@
+from django.db import IntegrityError
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic.detail import DetailView
@@ -7,7 +8,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import get_user_model
 
 from recipes.forms import RatingForm
-from recipes.models import Recipe, ShoppingCart
+from recipes.models import Ingredient, Recipe, ShoppingItem
 
 
 def log_rating(request, recipe_id):
@@ -80,13 +81,32 @@ class UserListView(ListView):
 
 ############## Shopping Cart Views ###################
 
-class ShoppingCartCreateView(CreateView):
-    pass
+def create_shopping_item(request):
+    ingredient_id = request.POST.get("ingredient_id")
+    ingredient = Ingredient.objects.get(id=ingredient_id)
+    user = request.user
 
-class ShoppingCartDeleteView(DeleteView):
-    pass
+    try:
+        ShoppingItem.objects.create(food_item=ingredient.food, user=user)
+
+    except IntegrityError:
+        print("Integrity Error")
+
+    return redirect(
+        "recipe_detail", pk=ingredient.recipe.id
+    )
+
+
+
+def delete_all_shopping_items(request):
+    user = request.user
+    ShoppingItem.objects.filter(user=user).delete()
+
+    return redirect("shopping_list")
+
+    
 
 class ShoppingCartListView(ListView):
-    model = ShoppingCart
+    model = ShoppingItem
     template_name = "cart/list.html"
     context_object_name = "carts"
