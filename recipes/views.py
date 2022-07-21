@@ -7,7 +7,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import get_user_model
 
 from recipes.forms import RatingForm
-from recipes.models import Recipe
+from recipes.models import Recipe, ShoppingCart
 
 
 def log_rating(request, recipe_id):
@@ -76,3 +76,17 @@ class UserListView(ListView):
         context = super().get_context_data(**kwargs)
         context['users'] = users
         return context
+
+
+############## Shopping Cart Views ###################
+
+class ShoppingCartCreateView(CreateView):
+    pass
+
+class ShoppingCartDeleteView(DeleteView):
+    pass
+
+class ShoppingCartListView(ListView):
+    model = ShoppingCart
+    template_name = "cart/list.html"
+    context_object_name = "carts"

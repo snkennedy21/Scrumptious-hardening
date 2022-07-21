@@ -1,0 +1,14 @@
+{% extends 'paginate.html' %}
+
+{% block content %}
+<main class="recipe-grid">
+  <p>hi</p>
+  {% for cart in carts %}
+  <div class="recipe-card">
+    <h2 class="recipe-card-title">
+      <p>{{ cart.food_item }}</p>
+    </h2>
+  </div>
+  {% endfor %}
+</main>
+{% endblock content %}
