@@ -38,7 +38,14 @@ class RecipeDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["rating_form"] = RatingForm()
+
+        shopping_list = []
+        for item in self.request.user.shopping_items.all():
+            shopping_list.append(item.food_item)
+        context["shopping_list"] = shopping_list
         return context
+
+
 
 
 class RecipeCreateView(CreateView):
@@ -66,9 +73,6 @@ class RecipeDeleteView(DeleteView):
 
 User = get_user_model()
 users = User.objects.all()
-
-print(Recipe.objects.all())
-
 class UserListView(ListView):
     model = User
     template_name = "recipes/users.html"
@@ -104,7 +108,7 @@ def delete_all_shopping_items(request):
 
     return redirect("shopping_list")
 
-    
+
 
 class ShoppingCartListView(ListView):
     model = ShoppingItem
