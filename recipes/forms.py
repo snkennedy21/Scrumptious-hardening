@@ -19,3 +19,9 @@ class RatingForm(forms.ModelForm):
     class Meta:
         model = Rating
         fields = ["value"]
+
+
+class ResizingForm(forms.ModelForm):
+    class Meta:
+        model = Recipe
+        fields = ["servings"]

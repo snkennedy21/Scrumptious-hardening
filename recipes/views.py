@@ -24,6 +24,8 @@ def log_rating(request, recipe_id):
                 return redirect("recipes_list")
     return redirect("recipe_detail", pk=recipe_id)
 
+def resize(request, recipe_id):
+    pass
 
 class RecipeListView(ListView):
     model = Recipe
@@ -38,20 +40,21 @@ class RecipeDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["rating_form"] = RatingForm()
-
         shopping_list = []
         for item in self.request.user.shopping_items.all():
             shopping_list.append(item.food_item)
+
+        context["servings"] = self.request.GET.get("servings")
+
         context["shopping_list"] = shopping_list
         return context
-
 
 
 
 class RecipeCreateView(CreateView):
     model = Recipe
     template_name = "recipes/new.html"
-    fields = ["name", "description", "image"]
+    fields = ["name", "description", "image", 'servings']
     success_url = reverse_lazy("recipes_list")
 
     def form_valid(self, form):
@@ -62,7 +65,7 @@ class RecipeCreateView(CreateView):
 class RecipeUpdateView(UpdateView):
     model = Recipe
     template_name = "recipes/edit.html"
-    fields = ["name", "author", "description", "image"]
+    fields = ["name", "author", "description", "image", 'servings']
     success_url = reverse_lazy("recipes_list")
 
 
